@@ -1,3 +1,19 @@
+import processing.core.*; 
+import processing.data.*; 
+import processing.event.*; 
+import processing.opengl.*; 
+
+import java.util.HashMap; 
+import java.util.ArrayList; 
+import java.io.File; 
+import java.io.BufferedReader; 
+import java.io.PrintWriter; 
+import java.io.InputStream; 
+import java.io.OutputStream; 
+import java.io.IOException; 
+
+public class silentGame extends PApplet {
+
 PImage markerImg, altMarkerImg;
 PImage bucketImg, altBucketImg;
 //PImage eraserImg, altEraserImg;
@@ -7,14 +23,14 @@ int l, w;
 int markerX, markerY, cameraX, cameraY, paletteX, paletteY, greyX, greyY,bucketX, bucketY;
 //paintX, paintY, bucketX, bucketY, eraserX, eraserY,
 boolean draw, bucket;//paint, bucket, eraser;
-color bg;
-color c;
+int bg;
+int c;
 int num;
 
 //import processing.video.*;
 
 
-void setup() {
+public void setup() {
   size(1500, 700);
   num = 0;
   background(255);
@@ -65,7 +81,7 @@ void setup() {
   c = color(0);
 }
 
-void draw() {
+public void draw() {
   rect(0,0, 125, 700);
   fill(100);
   strokeWeight(10);
@@ -105,7 +121,7 @@ void draw() {
 //   image(cam, 125, 0);
 }
 
-void mousePressed() {
+public void mousePressed() {
 //  if (overButton(paintX, paintY, l, w)) {
 //    paint = true;
 //    bucket = false;
@@ -139,11 +155,20 @@ void mousePressed() {
   
 }
 
-boolean overButton(int x, int y, int width, int height)  {
+public boolean overButton(int x, int y, int width, int height)  {
   if (mouseX >= x && mouseX <= x+width && 
       mouseY >= y && mouseY <= y+height) {
     return true;
   } else {
     return false;
+  }
+}
+  static public void main(String[] passedArgs) {
+    String[] appletArgs = new String[] { "--full-screen", "--bgcolor=#666666", "--stop-color=#cccccc", "silentGame" };
+    if (passedArgs != null) {
+      PApplet.main(concat(appletArgs, passedArgs));
+    } else {
+      PApplet.main(appletArgs);
+    }
   }
 }
